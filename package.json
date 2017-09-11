@@ -1,38 +1,39 @@
 {
     "name": "ruby-around-the-block",
-    "displayName": "Ruby Around the Block",
-    "description": "Toggle Ruby block style",
+    "displayName": "ruby-around-the-block",
+    "description": "Block style toggle for Ruby",
     "version": "0.0.1",
-    "publisher": "elliot-larson",
+    "publisher": "elliotlarson",
     "engines": {
-        "vscode": "^1.14.0"
+        "vscode": "^1.16.0"
     },
     "categories": [
         "Other"
     ],
     "activationEvents": [
-        "onCommand:extension.sayHello"
+        "onCommand:extension.rubyBlockToggle"
     ],
     "main": "./out/src/extension",
     "contributes": {
         "commands": [
             {
-                "command": "extension.sayHello",
-                "title": "Hello World"
+                "command": "extension.rubyBlockToggle",
+                "title": "Ruby Block Toggle"
             }
         ]
     },
     "scripts": {
-        "vscode:prepublish": "tsc -p ./",
-        "compile": "tsc -watch -p ./",
+        "vscode:prepublish": "npm run compile",
+        "compile": "tsc -p ./",
+        "watch": "tsc -watch -p ./",
         "postinstall": "node ./node_modules/vscode/bin/install",
-        "test": "node ./node_modules/vscode/bin/test"
+        "test": "npm run compile && node ./node_modules/vscode/bin/test"
     },
     "devDependencies": {
-        "typescript": "^2.0.3",
-        "vscode": "^1.0.0",
-        "mocha": "^2.3.3",
-        "@types/node": "^6.0.40",
-        "@types/mocha": "^2.2.32"
+        "typescript": "^2.5.2",
+        "vscode": "^1.1.5",
+        "mocha": "^3.5.0",
+        "@types/node": "^7.0.43",
+        "@types/mocha": "^2.2.42"
     }
 }
