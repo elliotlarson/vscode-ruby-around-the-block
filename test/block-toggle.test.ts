@@ -413,6 +413,23 @@ describe('getBraceReplacementBlockLines()', () => {
       expect(replacementLines).to.deep.eq(expectedReplacementLines);
     });
   });
+
+  context('single line brace block with argument block', () => {
+    it('returns the expected replacement lines', () => {
+      const currentBlockDescriptor: CurrentBlockDescriptor = {
+        blockType: 'brace',
+        startLineNum: 2,
+        startColumnNum: 33,
+        endLineNum: 2,
+        endColumnNum: 54,
+      };
+      const lines = bracesBlockWithArgument.split('\n');
+      const expectedReplacementLines = doEndBlockWithArgument.split('\n').slice(2, 5);
+      const replacementLines =
+        getBraceReplacementBlockLines(lines, currentBlockDescriptor);
+      expect(replacementLines).to.deep.eq(expectedReplacementLines);
+    });
+  });
 });
 
 describe('blockToggle()', () => {

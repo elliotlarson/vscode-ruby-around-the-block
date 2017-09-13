@@ -145,16 +145,26 @@ export function getBraceReplacementBlockLines(
   const startCol = currentBlockDescriptor.startColumnNum;
   const endCol = currentBlockDescriptor.endColumnNum;
 
+  let args = '';
+  const argMatches = blockLines[0].match(/\|.*\|/);
+  if (argMatches !== null) {
+    args = ` ${argMatches[0]}`;
+  }
+
   if (blockLines.length === 1) {
-    const braceLine = blockLines[0];
-    const indent = braceLine.match(/^\s*/)[0];
+    const indent = blockLines[0].match(/^\s*/)[0];
+    let braceLine = `${blockLines[0].substring(0, startCol)}do${args}`;
+    let inBlock = blockLines[0].substring(startCol + 1, endCol).trim();
+    if (argMatches !== null) {
+      inBlock = inBlock.replace(argMatches[0], '').trim();
+    }
     return [
-      `${braceLine.substring(0, startCol)}do`,
-      `${indent}  ${braceLine.substring(startCol + 1, endCol).trim()}`,
+      `${braceLine}`,
+      `${indent}  ${inBlock}`,
       `${indent}end`,
     ];
   } else {
-    blockLines[0] = `${blockLines[0].substring(0, startCol)}do`;
+    blockLines[0] = `${blockLines[0].substring(0, startCol)}do${args}`;
     const lastInd = blockLines.length - 1;
     blockLines[lastInd] = `${blockLines[lastInd].substring(0, endCol)}end`;
     return blockLines;
