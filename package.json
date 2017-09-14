@@ -1,8 +1,8 @@
 {
     "name": "ruby-around-the-block",
-    "displayName": "ruby-around-the-block",
+    "displayName": "Ruby Around the Block",
     "description": "Block style toggle for Ruby",
-    "version": "0.0.3",
+    "version": "0.0.4",
     "publisher": "elliotlarson",
     "icon": "images/icon.png",
     "bugs": "https://github.com/elliotlarson/vscode-ruby-around-the-block/issues",
