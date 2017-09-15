@@ -41,9 +41,14 @@ export function activate(context: vscode.ExtensionContext) {
     // https://code.visualstudio.com/docs/extensionAPI/vscode-api#TextEditorEdit
     editor.edit((editBuilder: vscode.TextEditorEdit) => {
       editBuilder.replace(replaceRange, replacementString);
-    });
 
-    // 5. set current cursor position to first line of block
+      // 5. set current cursor position to first line of block
+      if (replacementCode.replacementLines.length === 1) {
+        var newPosition = new vscode.Position(replacementCode.startLineNum, 0);
+        var newSelection = new vscode.Selection(newPosition, newPosition);
+        editor.selection = newSelection;
+      }
+    });
   });
 
   context.subscriptions.push(disposable);
