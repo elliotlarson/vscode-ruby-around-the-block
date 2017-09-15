@@ -21,7 +21,7 @@ const START_DOEND_BLOCK_REGEXP = /do\b/;
 
 const START_SEARCHES: BlockMarkerSearch[] = [
   { markerRegex: START_DOEND_BLOCK_REGEXP, blockType: 'doend' },
-  { markerRegex: /{/, blockType: 'brace' },
+  { markerRegex: /[^#]({)/, blockType: 'brace' },
 ];
 
 const END_DOEND_BLOCK_REGEXP = /end\b/;
@@ -65,9 +65,13 @@ function findBlock(
     if (onlyFindingForSpecficType) { continue; }
     let matches = search.markerRegex.exec(currentLine);
     if (matches === null) { continue; }
+    let columnNum = matches.index;
+    if (/.{/.test(matches[0])) {
+      columnNum += 1;
+    }
     return {
       lineNum: currentLineNum,
-      columnNum: matches.index,
+      columnNum: columnNum,
       blockType: search.blockType,
     };
   }

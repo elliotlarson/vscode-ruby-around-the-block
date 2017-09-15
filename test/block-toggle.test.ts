@@ -18,6 +18,12 @@ let doEndBlock = `
   end
   `;
 
+let doEndBlockWithStringInterpolation = `
+users.map do |user|
+  "sello, #{user.full_name}!"
+end
+`;
+
 let doEndBlockSingleLine = `
   describe 'my test' do
     let(:foo) do create(:foo) end
@@ -94,6 +100,13 @@ describe('findBlockStart()', () => {
       lineNum: 2,
       columnNum: 14,
       blockType: 'doend',
+    },
+    {
+      codeString: 'doEndBlockWithStringInterpolation',
+      cursorLine: 2,
+      lineNum: 1,
+      columnNum: 10,
+      blockType: 'doend'
     },
     {
       codeString: 'doEndBlockSingleLine',

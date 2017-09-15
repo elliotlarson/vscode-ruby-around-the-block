@@ -2,7 +2,7 @@
     "name": "ruby-around-the-block",
     "displayName": "Ruby Around the Block",
     "description": "Block style toggle for Ruby",
-    "version": "0.0.4",
+    "version": "0.1.0",
     "publisher": "elliotlarson",
     "icon": "images/icon.png",
     "bugs": "https://github.com/elliotlarson/vscode-ruby-around-the-block/issues",
@@ -25,6 +25,12 @@
             {
                 "command": "extension.rubyBlockToggle",
                 "title": "Ruby Block Toggle"
+            }
+        ],
+        "keybindings": [
+            {
+                "command": "extension.rubyBlockToggle",
+                "key": "cmd+ctrl+b"
             }
         ]
     },
