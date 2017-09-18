@@ -18,6 +18,12 @@ let doEndBlock = `
   end
   `;
 
+let doEndBlockWithQuotedHashmark = `
+within('#main_nav') do
+  click_on('about us')
+end
+`;
+
 let doEndBlockWithStringInterpolation = `
 users.map do |user|
   "sello, #{user.full_name}!"
@@ -33,7 +39,7 @@ let doEndBlockSingleLine = `
 let doEndBlockWithComment = `
   describe 'my test' do
     let(:foo) do
-      # a comment with do and end in it
+      # a comment
       create(:foo)
       # here's another comment
     end
@@ -77,7 +83,7 @@ let doEndBlockWithHash = `
 let bracesBlockWithComment = `
   describe 'my test' do
     let(:foo) {
-      # a comment with do and end in it
+      # a comment
       create(:foo)
       # here's another comment
     }
@@ -99,6 +105,13 @@ describe('findBlockStart()', () => {
       cursorLine: 3,
       lineNum: 2,
       columnNum: 14,
+      blockType: 'doend',
+    },
+    {
+      codeString: 'doEndBlockWithQuotedHashmark',
+      cursorLine: 2,
+      lineNum: 1,
+      columnNum: 20,
       blockType: 'doend',
     },
     {
@@ -128,13 +141,6 @@ describe('findBlockStart()', () => {
       lineNum: 2,
       columnNum: 14,
       blockType: 'brace',
-    },
-    {
-      codeString: 'doEndBlockWithComment',
-      cursorLine: 4,
-      lineNum: 2,
-      columnNum: 14,
-      blockType: 'doend',
     },
     {
       codeString: 'doEndBlockWithArgument',

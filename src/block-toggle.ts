@@ -31,16 +31,10 @@ const END_SEARCHES: BlockMarkerSearch[] = [
   { markerRegex: /}$/, blockType: 'brace' },
 ];
 
-const COMMENT_REGEXP = /#[^{].*$/;
-
 export function findBlockStart(
   lines: string[], currentLineNum: number
 ): BlockMarkerPosition {
   return findBlock(lines, currentLineNum, -1, START_SEARCHES);
-}
-
-function stripComment(line: string): string {
-  return line.replace(COMMENT_REGEXP, '');
 }
 
 export function findBlockEnd(
@@ -58,7 +52,7 @@ function findBlock(
   blockMarkerSearches: BlockMarkerSearch[],
   blockType: null | BlockMarker = null,
 ): BlockMarkerPosition {
-  const currentLine = rtrim(stripComment(lines[currentLineNum]));
+  const currentLine = rtrim(lines[currentLineNum]);
   for (let search of blockMarkerSearches) {
     const onlyFindingForSpecficType: boolean =
       blockType !== null && search.blockType !== blockType;
